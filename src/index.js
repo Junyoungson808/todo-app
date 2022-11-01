@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
+import { MantineProvider } from '@mantine/core';
 import App from './App.js';
+import SettingsProvider from './Context/Settings/Settings.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <SettingsProvider>
+        <App />
+      </SettingsProvider>
+    </MantineProvider>
   </React.StrictMode>
 );
 

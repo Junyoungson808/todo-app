@@ -3,9 +3,9 @@
 A web application that involves us refactoring another teams code, modularize code and use [Mantine](https://mantine.dev/) to style. This app will use react Context. Context provides a means of passing state down the component tree through a Provider/Consumer relationship.
 
 [phase1]()
-[phase2]()
+<!-- [phase2]()
 [phase3]()
-[phase4]()
+[phase4]() -->
 
 ## Setup
 
