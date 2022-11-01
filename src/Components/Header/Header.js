@@ -1,32 +1,22 @@
 import React from 'react';
-// import { createStyles } from '@mantine/core';
+import { createStyles, Header as Mheader } from '@mantine/core';
 // import './header.scss';
 
-// const HEADER_HEIGHT = 84;
+const useStyles = createStyles((theme) => ({
+  header: {
+    backgroundColor: theme.colors.teal[9],
+    borderRadius: theme.radius.sm,
+  },
+}));
 
 const Header = () => {
+  const { classes } = useStyles();
 
-  // const useStyles = createStyles((theme) => ({
-  //   header: {
-  //     backgroundColor: theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
-  //     borderBottom: 0,
-  //   },
-
-  //   inner: {
-  //     height: HEADER_HEIGHT,
-  //     display: 'flex',
-  //     alignItems: 'center',
-  //     justifyContent: 'space-between',
-  //   }
-
-  // })
-  // )
-
-  return(
+    return(
     <>
-    <header id="header-main">
+    <Mheader className={classes.header} id="header-main">
       <h1>Home</h1>
-    </header>
+    </Mheader>
     </>
   )
 }
