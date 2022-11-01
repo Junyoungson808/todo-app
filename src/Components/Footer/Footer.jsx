@@ -1,11 +1,11 @@
-import React from "react";
+// import React from "react";
 
-const Footer = () => {
-  return(
-    <footer>
-      &copy; 2022 Junyoung Son @ Code Fellows
-    </footer>
-  )
-}
+// const Footer = () => {
+//   return(
+//     <footer>
+//       &copy; 2022 Junyoung Son @ Code Fellows
+//     </footer>
+//   )
+// }
 
-export default Footer;
+// export default Footer;

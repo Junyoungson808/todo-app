@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
-
+import Header from '../Header/Header.jsx';
+import List from '../List/List.jsx';
 import { v4 as uuid } from 'uuid';
+import { Button, Card, createStyles, Grid, Slider, Text, TextInput } from '@mantine/core';
+
+const useStyles = createStyles((theme) => ({
+  formHeading: {
+    fontSize: theme.fontSizes.lg,
+    fontWeight: 'bold',
+  },
+}));
 
 const ToDo = () => {
+  const { classes } = useStyles();
 
   const [defaultValues] = useState({
     difficulty: 4,
@@ -12,7 +22,7 @@ const ToDo = () => {
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
-  function addItem(item) {
+  function addItem({...item}) {
     item.id = uuid();
     item.complete = false;
     console.log(item);
@@ -20,15 +30,15 @@ const ToDo = () => {
   }
 
   function deleteItem(id) {
-    const items = list.filter( item => item.id !== id );
+    const items = list.filter(item => item.id !== id);
     setList(items);
   }
 
   function toggleComplete(id) {
 
-    const items = list.map( item => {
-      if ( item.id === id ) {
-        item.complete = ! item.complete;
+    const items = list.map(item => {
+      if (item.id === id) {
+        item.complete = !item.complete;
       }
       return item;
     });
@@ -44,48 +54,54 @@ const ToDo = () => {
     // linter will want 'incomplete' added to dependency array unnecessarily. 
     // disable code used to avoid linter warning 
     // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, [list]);  
+  }, [list]);
 
   return (
     <>
-      <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
-      </header>
+      <Header incomplete={incomplete} />
+      <Grid style={{ width: '80%', margin: 'auto' }}>
+        <Grid.Col xs={12} sm={4}>
+          <Card withBorder p='xs' >
+            <Text className={classes.formHeading}>Add To Do Item</Text>
 
-      <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
 
-        <h2>Add To Do Item</h2>
+              <TextInput
+                placeholder="Item Details"
+                name="text"
+                onChange={handleChange}
+                label="To Do Item"
+              />
 
-        <label>
-          <span>To Do Item</span>
-          <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
-        </label>
+              <TextInput
+                placeholder="Assigned"
+                name="Assigneee"
+                onChange={handleChange}
+                label="Assigned To"
+              />
 
-        <label>
-          <span>Assigned To</span>
-          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
-        </label>
+              <Text> Difficulty </Text>
+              <Slider
+                onChange={handleChange}
+                defaultValue={defaultValues.difficulty}
+                min={0}
+                max={5}
+                step={1}
+                name="difficulty"
+                type="range"
+                mb='lg'
+              />
 
-        <label>
-          <span>Difficulty</span>
-          <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
-        </label>
+              <Button type="submit">Add Item</Button>
+              
+            </form>
 
-        <label>
-          <button type="submit">Add Item</button>
-        </label>
-      </form>
-
-      {list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
-        </div>
-      ))}
-
+          </Card>
+        </Grid.Col>
+        <Grid.Col xs={12} sm={8}>
+          <List list={list} toggleComplete={toggleComplete} deleteItem={deleteItem}/>
+        </Grid.Col>
+      </Grid>
     </>
   );
 };
