@@ -1,5 +1,6 @@
+import { Grid } from "@mantine/core";
 import React, { useContext } from "react";
-import { SettingsContext } from "../../Context/Settings/Settings";
+import { SettingsContext } from "../../Context/Settings";
 import useForm from '../../hooks/form';
 
 const AddForm = ({ children }) => {
@@ -8,6 +9,11 @@ const AddForm = ({ children }) => {
 
   return (
     <>
+      <Header />
+        <Grid>
+
+          <Grid.Col xs={12} sm={4}>
+          
       <form onSubmit={handleSubmit}>
 
         <h2>Add To Do Item</h2>
@@ -31,6 +37,8 @@ const AddForm = ({ children }) => {
           <button type="submit">Add Item</button>
         </label>
       </form>
+      </Grid.Col>
+        </Grid>
     </>
   )
 }
