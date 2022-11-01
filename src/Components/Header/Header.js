@@ -1,26 +1,26 @@
 import React from 'react';
-import { createStyles } from '@mantine/core';
+// import { createStyles } from '@mantine/core';
 // import './header.scss';
 
-const HEADER_HEIGHT = 84;
+// const HEADER_HEIGHT = 84;
 
 const Header = () => {
 
-  const useStyles = createStyles((theme) => ({
-    header: {
-      backgroundColor: theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
-      borderBottom: 0,
-    },
+  // const useStyles = createStyles((theme) => ({
+  //   header: {
+  //     backgroundColor: theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
+  //     borderBottom: 0,
+  //   },
 
-    inner: {
-      height: HEADER_HEIGHT,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    }
+  //   inner: {
+  //     height: HEADER_HEIGHT,
+  //     display: 'flex',
+  //     alignItems: 'center',
+  //     justifyContent: 'space-between',
+  //   }
 
-  })
-  )
+  // })
+  // )
 
   return(
     <>

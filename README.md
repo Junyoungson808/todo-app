@@ -32,4 +32,4 @@ Use the Mantine Pagination component to let the users navigate a long list of it
 Hide completed items in the list (the ability to show will be added in a later lab)
 ````
 
-## ![UML](./uml-lab26.png)
+## ![UML](./todo.png)
