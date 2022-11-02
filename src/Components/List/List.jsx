@@ -11,7 +11,6 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-
 const List = ({ list, toggleComplete, deleteItem }) => {
 
   const { pageItems, showCompleted } = useContext(SettingsContext);
