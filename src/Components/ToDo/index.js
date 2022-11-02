@@ -1,20 +1,108 @@
-import { useContext } from 'react';
-import { SettingsContext } from '../../Context/Settings/Settings';
-import AddForm from '../AddForm/AddForm';
-import List from '../List/List';
+import React, { useEffect, useState } from 'react';
+import useForm from '../../hooks/form.js';
+import AppHeader from '../Header/Header.jsx';
+import List from '../List/List.jsx';
+import { v4 as uuid } from 'uuid';
+import { Button, Card, createStyles, Grid, Slider, Text, TextInput } from '@mantine/core';
 
+
+const useStyles = createStyles((theme) => ({
+  formHeading: {
+    fontSize: theme.fontSizes.lg,
+    fontWeight: 'bold',
+  },
+}));
 
 const ToDo = () => {
+  const { classes } = useStyles();
 
-  const { incomplete } = useContext(SettingsContext);
+  const [defaultValues] = useState({
+    difficulty: 4,
+  });
+  const [list, setList] = useState([]);
+  const [incomplete, setIncomplete] = useState([]);
+  const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+
+  function addItem({...item}) {
+    item.id = uuid();
+    item.complete = false;
+    console.log(item);
+    setList([...list, item]);
+  }
+
+  function deleteItem(id) {
+    const items = list.filter(item => item.id !== id);
+    setList(items);
+  }
+
+  function toggleComplete(id) {
+
+    const items = list.map(item => {
+      if (item.id === id) {
+        item.complete = !item.complete;
+      }
+      return item;
+    });
+
+    setList(items);
+
+  }
+
+  useEffect(() => {
+    let incompleteCount = list.filter(item => !item.complete).length;
+    setIncomplete(incompleteCount);
+    document.title = `To Do List: ${incomplete}`;
+    // linter will want 'incomplete' added to dependency array unnecessarily. 
+    // disable code used to avoid linter warning 
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
+  }, [list]);
 
   return (
     <>
-      <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
-      </header>
-      <AddForm />
-      <List />
+      <AppHeader incomplete={incomplete} />
+      <Grid style={{ width: '80%', margin: 'auto' }}>
+        <Grid.Col xs={12} sm={4}>
+          <Card withBorder p='xs' >
+            <Text className={classes.formHeading}>Add To Do Item</Text>
+
+            <form onSubmit={handleSubmit}>
+
+              <TextInput
+                placeholder="Item Details"
+                name="text"
+                onChange={handleChange}
+                label="To Do Item"
+              />
+
+              <TextInput
+                placeholder="Assigned"
+                name="assignee"
+                onChange={handleChange}
+                label="Assigned To"
+              />
+
+              <Text> Difficulty </Text>
+              <Slider
+                onChange={handleChange}
+                defaultValue={defaultValues.difficulty}
+                min={0}
+                max={5}
+                step={1}
+                name="difficulty"
+                type="range"
+                mb='lg'
+              />
+
+              <Button type="submit">Add Item</Button>
+
+            </form>
+
+          </Card>
+        </Grid.Col>
+        <Grid.Col xs={12} sm={8}>
+          <List list={list} toggleComplete={toggleComplete} deleteItem={deleteItem}/>
+        </Grid.Col>
+      </Grid>
     </>
   );
 };

@@ -1,38 +1,46 @@
-import React, { useContext } from "react";
-import { SettingsContext } from "../../Context/Settings/Settings";
-import useForm from '../../hooks/form';
+// import { Grid } from "@mantine/core";
+// import React, { useContext } from "react";
+// import { SettingsContext } from "../../Context/Settings";
+// import useForm from '../../hooks/form';
 
-const AddForm = ({ children }) => {
-  const { defaultValues, addItem } = useContext(SettingsContext);
-  const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+// const AddForm = ({ children }) => {
+//   const { defaultValues, addItem } = useContext(SettingsContext);
+//   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
+//   return (
+//     <>
+//       <Header />
+//         <Grid>
 
-        <h2>Add To Do Item</h2>
+//           <Grid.Col xs={12} sm={4}>
+          
+//       <form onSubmit={handleSubmit}>
 
-        <label>
-          <span>To Do Item</span>
-          <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
-        </label>
+//         <h2>Add To Do Item</h2>
 
-        <label>
-          <span>Assigned To</span>
-          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
-        </label>
+//         <label>
+//           <span>To Do Item</span>
+//           <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
+//         </label>
 
-        <label>
-          <span>Difficulty</span>
-          <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
-        </label>
+//         <label>
+//           <span>Assigned To</span>
+//           <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
+//         </label>
 
-        <label>
-          <button type="submit">Add Item</button>
-        </label>
-      </form>
-    </>
-  )
-}
+//         <label>
+//           <span>Difficulty</span>
+//           <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
+//         </label>
 
-export default AddForm;
+//         <label>
+//           <button type="submit">Add Item</button>
+//         </label>
+//       </form>
+//       </Grid.Col>
+//         </Grid>
+//     </>
+//   )
+// }
+
+// export default AddForm;
