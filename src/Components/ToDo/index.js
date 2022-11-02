@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
-import Header from '../Header/Header.jsx';
+import AppHeader from '../Header/Header.jsx';
 import List from '../List/List.jsx';
 import { v4 as uuid } from 'uuid';
 import { Button, Card, createStyles, Grid, Slider, Text, TextInput } from '@mantine/core';
+
 
 const useStyles = createStyles((theme) => ({
   formHeading: {
@@ -58,7 +59,7 @@ const ToDo = () => {
 
   return (
     <>
-      <Header incomplete={incomplete} />
+      <AppHeader incomplete={incomplete} />
       <Grid style={{ width: '80%', margin: 'auto' }}>
         <Grid.Col xs={12} sm={4}>
           <Card withBorder p='xs' >
@@ -75,7 +76,7 @@ const ToDo = () => {
 
               <TextInput
                 placeholder="Assigned"
-                name="Assigneee"
+                name="assignee"
                 onChange={handleChange}
                 label="Assigned To"
               />
@@ -93,7 +94,7 @@ const ToDo = () => {
               />
 
               <Button type="submit">Add Item</Button>
-              
+
             </form>
 
           </Card>

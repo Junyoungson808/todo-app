@@ -1,4 +1,5 @@
 import { createStyles, Header, Navbar, Text } from '@mantine/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   navbar: {
@@ -26,8 +27,8 @@ const AppHeader = ({ incomplete }) => {
   return (
       <Header id="header-main">
         <Navbar className={classes.navbar}>
-          <Text>Home</Text>               {/* add button to go home */}
-          <Text>Settings</Text>           {/* add button to go settings */}
+          <Text to="/" className='nav-link' >Home</Text>               
+          <Text to="/settings" className='nav-link' >Settings</Text>          
         </Navbar>
         <h1 className={classes.h1}>To Do List: {incomplete} items pending</h1>
       </Header>

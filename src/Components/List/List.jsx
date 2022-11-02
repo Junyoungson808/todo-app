@@ -1,14 +1,22 @@
-import { Card, Pagination, Badge, Button } from "@mantine/core";
+import { Card, Pagination, Badge, Button, createStyles, Space } from "@mantine/core";
 import { useContext, useState } from "react";
 import { SettingsContext } from "../../Context/Settings";
 import { When } from 'react-if';
-import { IconTrash } from '@tabler/icons';
+
+
+const useStyles = createStyles((theme) => ({
+  card: {
+    padding: theme.spacing.sm,
+    gap: '20px',
+  },
+}));
+
 
 const List = ({ list, toggleComplete, deleteItem }) => {
-  
+
   const { pageItems, showCompleted } = useContext(SettingsContext);
   const [page, setPage] = useState(1);
-  // const [value, toggle] = useToggle(['green', 'red'])
+  const { classes } = useStyles();
 
   // pagination
   const listToRender = showCompleted ? list : list.filter(item => !item.complete)
@@ -17,20 +25,26 @@ const List = ({ list, toggleComplete, deleteItem }) => {
   const pageCount = Math.ceil(listToRender.length / pageItems);
   const displayList = listToRender.slice(listStart, listEnd);
 
-
   return (
     <>
 
       {displayList.map(item => (
-        <Card key={item.id} withBorder >
+        <Card className={classes.card} key={item.id} withBorder >
+          <div className="cardHeader">
+            <Badge color={item.complete ? 'green' : 'red'} onClick={() => toggleComplete(item.id)}>
+              {item.complete ? "complete" : "pending"}
+            </Badge>
+            <Space w={30}/>
+            <small>
+              {item.assignee}
+            </small>
+            <div className="deleteButton">
+              <Button radius="xs" size="xs" onClick={() => deleteItem(item.id)}>Delete</Button>
+            </div>
+          </div>
           <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <Badge color={item.complete ? 'green' : 'red'} onClick={() => toggleComplete(item.id)}>
-            {item.complete ? "complete" : "pending" }
-          </Badge>
-          <Button icon={<IconTrash size={10}/>} onClick={() => deleteItem(item.id)}>Delete</Button> 
-          
+
+          <p className="cardFooter" ><small>Difficulty: {item.difficulty}</small></p>
         </Card>
       ))}
 
