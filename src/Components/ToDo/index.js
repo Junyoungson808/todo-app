@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
-import AppHeader from '../Header/Header.jsx';
 import List from '../List/List.jsx';
 import { v4 as uuid } from 'uuid';
 import { Button, Card, createStyles, Grid, Slider, Text, TextInput } from '@mantine/core';
-
 
 const useStyles = createStyles((theme) => ({
   formHeading: {
     fontSize: theme.fontSizes.lg,
     fontWeight: 'bold',
   },
+  h1: {
+    backgroundColor: theme.colors.gray[8],
+    color: theme.colors.gray[1],
+    width: '80%',
+    margin: 'auto',
+    padding: theme.spacing.md,
+    fontSize: theme.fontSizes.lg,
+    marginBottom: theme.spacing.md,
+    marginTop: theme.spacing.md,
+  }
 }));
 
 const ToDo = () => {
@@ -23,7 +31,7 @@ const ToDo = () => {
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
-  function addItem({...item}) {
+  function addItem({ ...item }) {
     item.id = uuid();
     item.complete = false;
     console.log(item);
@@ -59,7 +67,8 @@ const ToDo = () => {
 
   return (
     <>
-      <AppHeader incomplete={incomplete} />
+      <h1 className={classes.h1}>To Do List: {incomplete} items pending</h1>
+
       <Grid style={{ width: '80%', margin: 'auto' }}>
         <Grid.Col xs={12} sm={4}>
           <Card withBorder p='xs' >
@@ -92,15 +101,13 @@ const ToDo = () => {
                 type="range"
                 mb='lg'
               />
-
               <Button type="submit">Add Item</Button>
-
             </form>
 
           </Card>
         </Grid.Col>
         <Grid.Col xs={12} sm={8}>
-          <List list={list} toggleComplete={toggleComplete} deleteItem={deleteItem}/>
+          <List list={list} toggleComplete={toggleComplete} deleteItem={deleteItem} />
         </Grid.Col>
       </Grid>
     </>

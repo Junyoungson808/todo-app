@@ -6,13 +6,13 @@ const useForm = (callback, defaultValues = {}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    callback(values);
+    callback({...values});
   };
 
   const handleChange = (event) => {
     let name, value;
     if (typeof (event) === 'object') {
-      event.persist();
+      // event.persist();
       name = event.target.name;
       value = event.target.value;
     } else {
