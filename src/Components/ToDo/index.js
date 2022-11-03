@@ -44,16 +44,13 @@ const ToDo = () => {
   }
 
   function toggleComplete(id) {
-
     const items = list.map(item => {
       if (item.id === id) {
         item.complete = !item.complete;
       }
       return item;
     });
-
     setList(items);
-
   }
 
   useEffect(() => {
@@ -67,7 +64,7 @@ const ToDo = () => {
 
   return (
     <>
-      <h1 className={classes.h1}>To Do List: {incomplete} items pending</h1>
+      <h1 className={classes.h1} data-testid="todo-header" >To Do List: {incomplete} items pending</h1>
 
       <Grid style={{ width: '80%', margin: 'auto' }}>
         <Grid.Col xs={12} sm={4}>

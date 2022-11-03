@@ -13,7 +13,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const List = ({ list, toggleComplete, deleteItem }) => {
-  
+
   const { pageItems, showCompleted } = useContext(SettingsContext);
   const [page, setPage] = useState(1);
   const { classes } = useStyles();
@@ -41,7 +41,7 @@ const List = ({ list, toggleComplete, deleteItem }) => {
                 </Badge>
                 <Text padding="sm"> {item.assignee} </Text>
               </Group>
-              <CloseButton title="Delete Item" onClick={() => deleteItem(item.id)}/>
+              <CloseButton title="Delete Item" onClick={() => deleteItem(item.id)} />
             </Group>
           </Card.Section>
           <Text align="left" >{item.text}</Text>
