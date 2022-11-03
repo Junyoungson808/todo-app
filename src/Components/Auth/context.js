@@ -1,70 +1,71 @@
-import React, { useState } from 'react';
-import cookie from 'react-cookies';
-import jwt_decode from 'jwt-decode';
+// import React, { useState } from 'react';
+// import cookie from 'react-cookies';
+// import jwt_decode from 'jwt-decode';
 
-const testUsers = {
-  admin: {
-    password: 'admin',
-    name: 'Administrator',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW5pc3RyYXRvciIsInJvbGUiOiJhZG1pbiIsImNhcGFiaWxpdGllcyI6IlsnY3JlYXRlJywncmVhZCcsJ3VwZGF0ZScsJ2RlbGV0ZSddIiwiaWF0IjoxNTE2MjM5MDIyfQ.pAZXAlTmC8fPELk2xHEaP1mUhR8egg9TH5rCyqZhZkQ'
-  },
-  editor: {
-    password: 'editor',
-    name: 'Editor',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWRpdG9yIiwicm9sZSI6ImVkaXRvciIsImNhcGFiaWxpdGllcyI6IlsncmVhZCcsJ3VwZGF0ZSddIiwiaWF0IjoxNTE2MjM5MDIyfQ.3aDn3e2pf_J_1rZig8wj9RiT47Ae2Lw-AM-Nw4Tmy_s'
-  },
-  writer: {
-    password: 'writer',
-    name: 'Writer',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiV3JpdGVyIiwicm9sZSI6IndyaXRlciIsImNhcGFiaWxpdGllcyI6IlsnY3JlYXRlJ10iLCJpYXQiOjE1MTYyMzkwMjJ9.dmKh8m18mgQCCJp2xoh73HSOWprdwID32hZsXogLZ68'
-  },
-  user: {
-    password: 'user',
-    name: 'User',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlciIsInJvbGUiOiJ1c2VyIiwiY2FwYWJpbGl0aWVzIjoiWydyZWFkJ10iLCJpYXQiOjE1MTYyMzkwMjJ9.WXYvIKLdPz_Mm0XDYSOJo298ftuBqqjTzbRvCpxa9Go'
-  },
-};
+// const testUsers = {
+//   admin: {
+//     password: 'admin',
+//     name: 'Administrator',
+//     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW5pc3RyYXRvciIsInJvbGUiOiJhZG1pbiIsImNhcGFiaWxpdGllcyI6IlsnY3JlYXRlJywncmVhZCcsJ3VwZGF0ZScsJ2RlbGV0ZSddIiwiaWF0IjoxNTE2MjM5MDIyfQ.pAZXAlTmC8fPELk2xHEaP1mUhR8egg9TH5rCyqZhZkQ'
+//   },
+//   editor: {
+//     password: 'editor',
+//     name: 'Editor',
+//     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWRpdG9yIiwicm9sZSI6ImVkaXRvciIsImNhcGFiaWxpdGllcyI6IlsncmVhZCcsJ3VwZGF0ZSddIiwiaWF0IjoxNTE2MjM5MDIyfQ.3aDn3e2pf_J_1rZig8wj9RiT47Ae2Lw-AM-Nw4Tmy_s'
+//   },
+//   writer: {
+//     password: 'writer',
+//     name: 'Writer',
+//     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiV3JpdGVyIiwicm9sZSI6IndyaXRlciIsImNhcGFiaWxpdGllcyI6IlsnY3JlYXRlJ10iLCJpYXQiOjE1MTYyMzkwMjJ9.dmKh8m18mgQCCJp2xoh73HSOWprdwID32hZsXogLZ68'
+//   },
+//   user: {
+//     password: 'user',
+//     name: 'User',
+//     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlciIsInJvbGUiOiJ1c2VyIiwiY2FwYWJpbGl0aWVzIjoiWydyZWFkJ10iLCJpYXQiOjE1MTYyMzkwMjJ9.WXYvIKLdPz_Mm0XDYSOJo298ftuBqqjTzbRvCpxa9Go'
+//   },
+// };
 
-const AuthProvider = ({ children }) => {
+// const AuthProvider = ({ children }) => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({});
-  const [error, setError] = useState(null);
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
+//   const [user, setUser] = useState({});
+//   const [error, setError] = useState(null);
 
 
-  const can = (capability) => {
-    // note shorthand
-    return user?.capabilities?.includes(capability);
-  }
+//   const can = (capability) => {
+//     // note shorthand
+//     return user?.capabilities?.includes(capability);
+//   }
 
-  const login = (username, password) => {
-    // note shorthand
-    let authCredentials = testUsers[username];
+//   const login = (username, password) => {
+//     // note shorthand
+//     let authCredentials = testUsers[username];
 
-    if(authCredentials && authCredentials.password === password){
-      try {
-        // validate the token....
+//     if(authCredentials && authCredentials.password === password){
+//       try {
+//         // validate the token....
 
-      } catch (e) {
-        // maybe set error in state
-        console.error(e);
-      }
-    }
-  }
-}
+//       } catch (e) {
+//         // maybe set error in state
+//         console.error(e);
+//       }
+//     }
+//   }
+// }
 
-function _validateToken(token) {
-  try {
-    let validUser = jwt_decode(token);
-  } catch (e) {
-    setIsLoggedIn(false);
-    setError(e);
-    console.error(e);
-  }
+// function _validateToken(token) {
+//   try {
+//     let validUser = jwt_decode(token);
+//   } catch (e) {
+//     setIsLoggedIn(false);
+//     setError(e);
+//     console.error(e);
+//   }
 
-}
+// }
 
-export default AuthProvider;
+// export default AuthProvider;
+// -----------------------------------------------------------------------------------------------------------
 
 // export const LoginContext = React.createContext();
 
