@@ -1,7 +1,8 @@
-import { Card, createStyles, Grid, NumberInput, Switch, Text, TextInput } from "@mantine/core";
+import { Button, Card, createStyles, Grid, NumberInput, Switch, Text, TextInput } from "@mantine/core";
 import { IconSettings } from "@tabler/icons";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SettingsContext } from '../../Context/Settings';
+import { When } from 'react-if';
 
 const useStyles = createStyles((theme) => ({
   formHeading: {
@@ -21,8 +22,24 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const SettingsForm = () => {
-  const { pageItems, setPageItems, showCompleted, setShowCompleted, sort, setSort, } = useContext(SettingsContext);
   const { classes } = useStyles();
+  const { 
+    pageItems, 
+    setPageItems, 
+    showCompleted, 
+    setShowCompleted, 
+    sort, 
+    setSort, 
+    saveLocally, 
+  } = useContext(SettingsContext);
+  
+  const [show, setShow] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setShow(true);
+    saveLocally({ showCompleted, pageItems, sort });
+  }
 
   return (
     <>
@@ -30,24 +47,43 @@ const SettingsForm = () => {
       <Grid style={{ width: '80%', margin: 'auto' }} >
         <Grid.Col xs={12} sm={6}>
           <Card withBorder p="xs">
-            <Text>Update Settings</Text>
+            <form onSubmit={handleSubmit}>
+              <Text>Update Settings</Text>
 
-            <Switch 
-            label="show completed todos" 
-            checked={showCompleted} onChange={(event) => setShowCompleted(event.currentTarget.checked)} />
+              <Switch
+                label="show completed todos"
+                onChange={(event) => setShowCompleted(event.currentTarget.checked)}
+                checked={showCompleted}
+              />
 
-            <NumberInput onChange={(value) => setPageItems(value)} defaultValue={pageItems} placeholder={pageItems} label="Items Per Page" />
+              <NumberInput
+                label="Items Per Page"
+                onChange={(value) => setPageItems(value)}
+                defaultValue={pageItems}
+                placeholder={pageItems}
+              />
 
-            <TextInput placeholder={sort} onChange={(e) => setSort(e.target.value)} label="Sort Keyword" />
+              <TextInput
+                label="Sort Keyword"
+                onChange={(e) => setSort(e.target.value)}
+                placeholder={sort}
+              />
 
+              <Button type="submit">Show New Settings</Button>
+            </form>
           </Card>
         </Grid.Col>
         <Grid.Col xs={12} sm={6}>
-          <Grid.Col xs={12} sm={6}>
+          <When condition={show}>
             <Card withBorder p="xs">
-              <Text>result here</Text>
+              <Card.Section>
+              <Text m='xl'>Updated Settings</Text>
+              </Card.Section>
+              <Text m="sm">{showCompleted ? 'Show' : 'Hide'} </Text>
+              <Text m="sm">Items Per Page: {pageItems}</Text>
+              <Text m="sm">Sort Keyword: {sort} </Text>
             </Card>
-          </Grid.Col>
+          </When>
         </Grid.Col>
       </Grid>
     </>

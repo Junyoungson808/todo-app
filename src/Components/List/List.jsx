@@ -1,8 +1,9 @@
 import { Card, Pagination, Badge, createStyles, Text, Group, CloseButton } from "@mantine/core";
 import { useContext, useState } from "react";
 import { SettingsContext } from "../../Context/Settings";
-import { When } from 'react-if';
-
+import { When, Else, If, Then } from 'react-if';
+import { AuthContext } from "../../Context/Auth";
+import Auth from "../Auth";
 
 const useStyles = createStyles((theme) => ({
   Badge: {
@@ -13,7 +14,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const List = ({ list, toggleComplete, deleteItem }) => {
-
+  const { can } = useContext(AuthContext);
   const { pageItems, showCompleted } = useContext(SettingsContext);
   const [page, setPage] = useState(1);
   const { classes } = useStyles();
@@ -32,16 +33,32 @@ const List = ({ list, toggleComplete, deleteItem }) => {
           <Card.Section withBorder>
             <Group position="apart">
               <Group position="left">
-                <Badge
-                  className={classes.Badge}
-                  color={item.complete ? 'green' : 'red'}
-                  variant="filled" onClick={() => toggleComplete(item.id)}
-                >
-                  {item.complete ? "complete" : "pending"}
-                </Badge>
+                <If condition={can('update')}>
+                  <Then>
+                    <Badge
+                      onClick={() => toggleComplete(item.id)}
+                      className={classes.Badge}
+                      color={item.complete ? 'green' : 'red'}
+                      variant="filled"
+                    >
+                      {item.complete ? "complete" : "pending"}
+                    </Badge>
+                  </Then>
+                  <Else>
+                    <Badge
+                      className={classes.Badge}
+                      color={item.complete ? 'green' : 'red'}
+                      variant="filled"
+                    >
+                      {item.complete ? "complete" : "pending"}
+                    </Badge>
+                  </Else>
+                </If>
                 <Text padding="sm"> {item.assignee} </Text>
               </Group>
-              <CloseButton title="Delete Item" onClick={() => deleteItem(item.id)} />
+              <Auth capability="delete">
+                <CloseButton title="Delete Item" onClick={() => deleteItem(item.id)} />
+              </Auth>
             </Group>
           </Card.Section>
           <Text align="left" >{item.text}</Text>

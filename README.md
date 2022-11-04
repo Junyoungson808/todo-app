@@ -28,9 +28,9 @@ Used Demo as Reference for labs 31 & 32.
 
 ## Technical Requirements
 
-Phase 1:
+## Phase 1
 
-## ![UML](./week7%20labs.png)
+## ![UML - lab 31](./week7%20labs.png)
 
 Implement the React context API for defining settings across the entire application.
 
@@ -44,9 +44,9 @@ Implement the React context API for defining settings across the entire applicat
 - Use the Mantine Pagination component to let the users navigate a long list of items
 - Hide completed items in the list (the ability to show will be added in a later lab)
 
-Phase 2:
+## Phase 2
 
-## ![UML](./week7%20labs%20(1).png)
+## ![UML - lab 32](./week7%20labs%20(1).png)
 
 Implement the Context API to make some basic application settings available to components.
 
@@ -58,9 +58,9 @@ Implement the Context API to make some basic application settings available to c
 - Save the users choices in Local Storage
 - Retrieve their preferences from Local Storage and apply them to the application on startup
 
-Phase 3:
+## Phase 3
 
-## ![UML](./week7%20labs%20(2).png)
+## ![UML - lab 33](./week7%20labs%20(2).png)
 
 In Phase 3, we’d like to extend the functionality of the application by requiring users be logged in to view items and also restrict access based on user type. The user stories from Phases 1, and 2 remain unchanged. For this phase, we are now adding the following new user stories.
 
@@ -71,5 +71,41 @@ In Phase 3, we’d like to extend the functionality of the application by requir
 - As a user, I want to ensure that only fellow users that are allowed to “update”, based on their user type, can mark To Do Items complete
 - As a user, I want to ensure that only fellow users that are allowed to “delete”, based on their user type, can delete new To Do Items
 
-  ![Logged-Out Comp:](./todo-logged-out.png)
-  ![Logged-In (as editor) Comp:](./todo-editor.png)
+  <!-- ![Logged-Out Comp:](./todo-logged-out.png)
+  ![Logged-In (as editor) Comp:](./todo-editor.png) -->
+
+## Phase 4
+
+## ![UML - lab 34](./week7%20labs%20(2).png)
+
+In Phase 4, we will finalize the functionality of the application by connecting to live servers for login, authorization, and data access
+
+- Alter the Add, Toggle Complete, and Delete functions within your to do application to use your API instead of in memory state.
+- Fetch the current list of items from the database on application start
+- Whenever you add/update/delete an item, refresh the state so the user can instantly see the change
+- Consider: Do you re-fetch from the server every time you make a change?
+- If so, how?
+- If not, how will you stay in sync?
+- Alter the Login Context to use the server to login users instead of our mock users list.
+- Be sure to store the token in state as well as in a cookie so you can reference it later.
+
+
+<!-- - Stretch Goal
+- Use authorization middleware on the server to add another layer of protection, so that only users with the correct permissions can POST/UPDATE/DELETE. -->
+
+<!-- If you choose to do this, you’ll need to send a bearer token with every request…
+
+API Server
+You will need deployed API Server, which implements a todo item data model
+GET /todo: Gets a list of all items
+‘POST /todo’: Adds an item
+‘PUT /todo’: Updates an item (you’ll use this to mark them as complete)
+‘DELETE /todo/:id’ : Deletes an item
+Authentication Server
+You will need a deployed Authenticated API Server, which supports:
+Registration (/signup)
+Login (/signin)
+Authorization (via Bearer Token)
+ACL (using user roles)
+Make sure you have created the user roles and permissions lists that your front-end is expecting to tap into
+To Do data model for storing the actual to do items -->

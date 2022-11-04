@@ -1,5 +1,6 @@
 import { createStyles, Header, Navbar, Group } from '@mantine/core';
 import { Link } from 'react-router-dom';
+import Login from '../Login';
 
 const useStyles = createStyles((theme) => ({
   navbar: {
@@ -18,14 +19,17 @@ const AppHeader = ({ incomplete }) => {
   const { classes } = useStyles();
 
   return (
-      <Header id="header-main">
-        <Navbar className={classes.navbar}>
+    <Header id="header-main">
+      <Navbar className={classes.navbar}>
+        <Group position="apart">
           <Group>
-          <Link className={classes.link} to="/">Home</Link>               
-          <Link className={classes.link} to="/settings">Settings</Link>          
+            <Link className={classes.link} to="/">Home</Link>
+            <Link className={classes.link} to="/settings">Settings</Link>
           </Group>
-        </Navbar>
-      </Header>
+          <Login />
+        </Group>
+      </Navbar>
+    </Header>
   )
 }
 
