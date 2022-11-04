@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { screen, render } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 import SettingsProvider, { SettingsContext } from '.';
 
 describe('Settings Context Unit', () => {
@@ -8,11 +8,15 @@ describe('Settings Context Unit', () => {
       <SettingsProvider>
         <SettingsContext.Consumer>
           {
-            ({ showCompleted, pageItems, sort, }) => (
+            ({ showCompleted, pageItems, sort, setShowCompleted, setPageItems, setSort}) => (
               <ul>
                 <li data-testid="show-completed">{showCompleted.toString()}</li>
                 <li data-testid="page-items">{pageItems}</li>
                 <li data-testid="sort">{sort}</li>
+                <button onClick={() => setShowCompleted(true)}>ONE</button>
+                <button onClick={() => setPageItems(1)}>TWO</button>
+                <button onClick={() => setSort('toughness')}>THREE</button>
+
               </ul>
             )
           }
@@ -27,5 +31,17 @@ describe('Settings Context Unit', () => {
     expect(completedList).toHaveTextContent('true');
     expect(pageList).toHaveTextContent('3');
     expect(sortList).toHaveTextContent('difficulty');
+
+    let buttonOne = screen.getByTestId('ONE');
+    let buttonTwo = screen.getByTestId('TWO');
+    let buttonThree = screen.getByTestId('THREE');
+
+    fireEvent.click(buttonOne);
+    fireEvent.click(buttonTwo);
+    fireEvent.click(buttonThree);
+
+    expect(completedList).toHaveTextContent('false');
+    expect(pageList).toHaveTextContent('1');
+    expect(sortList).toHaveTextContent('toughness');
   })
 })
