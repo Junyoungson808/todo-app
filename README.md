@@ -6,10 +6,11 @@ Used Demo (Ryan's) as Reference.
 
 [phase1 - code-sandbox](https://codesandbox.io/p/github/Junyoungson808/todo-app/draft/loving-tu?file=%2FREADME.md&workspace=%257B%2522activeFileId%2522%253A%2522cl9xnjhxx0000lrkg3cb7e4fz%2522%252C%2522openFiles%2522%253A%255B%2522%252FREADME.md%2522%255D%252C%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522gitSidebarPanel%2522%253A%2522COMMIT%2522%252C%2522sidekickItems%2522%253A%255B%257B%2522key%2522%253A%2522cl9xnjkgq000o356h0pnotzbu%2522%252C%2522type%2522%253A%2522PROJECT_SETUP%2522%252C%2522isMinimized%2522%253Afalse%257D%252C%257B%2522type%2522%253A%2522PREVIEW%2522%252C%2522taskId%2522%253A%2522start%2522%252C%2522port%2522%253A3000%252C%2522key%2522%253A%2522cl9xnk0u40068356hzduppp8z%2522%252C%2522isMinimized%2522%253Afalse%257D%252C%257B%2522type%2522%253A%2522TASK_LOG%2522%252C%2522taskId%2522%253A%2522start%2522%252C%2522key%2522%253A%2522cl9xnjxxd004a356hsocitiyc%2522%252C%2522isMinimized%2522%253Afalse%257D%255D%257D)
 
-<!-- [phase2 - code-sandbox]() -->
+[phase2 - code-sandbox](https://codesandbox.io/p/github/Junyoungson808/todo-app/context-methods?file=%2FREADME.md&workspace=%257B%2522activeFileId%2522%253A%2522cl9xnsg8v000ylsjg6p18euas%2522%252C%2522openFiles%2522%253A%255B%255D%252C%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522gitSidebarPanel%2522%253A%2522COMMIT%2522%252C%2522sidekickItems%2522%253A%255B%257B%2522type%2522%253A%2522PREVIEW%2522%252C%2522taskId%2522%253A%2522start%2522%252C%2522port%2522%253A3000%252C%2522key%2522%253A%2522cla21xi7m00ei356hw65zxq7s%2522%252C%2522isMinimized%2522%253Afalse%257D%255D%257D)
 
-<!-- [phase3 - code-sandbox]()
-[phase4 - code-sandbox]() -->
+[phase3 - code-sandbox](https://codesandbox.io/p/github/Junyoungson808/todo-app/auth0?file=%2FREADME.md&workspace=%257B%2522activeFileId%2522%253A%2522cl9xnsg8v000ylsjg6p18euas%2522%252C%2522openFiles%2522%253A%255B%255D%252C%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522gitSidebarPanel%2522%253A%2522COMMIT%2522%252C%2522sidekickItems%2522%253A%255B%257B%2522type%2522%253A%2522PREVIEW%2522%252C%2522taskId%2522%253A%2522start%2522%252C%2522port%2522%253A3000%252C%2522key%2522%253A%2522cla21x10i008z356h6l4v66kg%2522%252C%2522isMinimized%2522%253Afalse%257D%255D%257D)
+
+[phase4 - code-sandbox](https://codesandbox.io/p/github/Junyoungson808/todo-app/api-integration?file=%2FREADME.md&workspace=%257B%2522activeFileId%2522%253A%2522cl9xnsg8v000ylsjg6p18euas%2522%252C%2522openFiles%2522%253A%255B%255D%252C%2522sidebarPanel%2522%253A%2522EXPLORER%2522%252C%2522gitSidebarPanel%2522%253A%2522COMMIT%2522%252C%2522sidekickItems%2522%253A%255B%257B%2522key%2522%253A%2522cla223xx100mp356h95zfmew2%2522%252C%2522type%2522%253A%2522PROJECT_SETUP%2522%252C%2522isMinimized%2522%253Afalse%257D%255D%257D)
 
 ## Setup
 
@@ -71,9 +72,6 @@ In Phase 3, we’d like to extend the functionality of the application by requir
 - As a user, I want to ensure that only fellow users that are allowed to “update”, based on their user type, can mark To Do Items complete
 - As a user, I want to ensure that only fellow users that are allowed to “delete”, based on their user type, can delete new To Do Items
 
-  <!-- ![Logged-Out Comp:](./todo-logged-out.png)
-  ![Logged-In (as editor) Comp:](./todo-editor.png) -->
-
 ## Phase 4
 
 ## ![UML - lab 34](./week7%20labs%20(3).png)
@@ -81,36 +79,18 @@ In Phase 3, we’d like to extend the functionality of the application by requir
 In Phase 4, we will finalize the functionality of the application by connecting to live servers for login, authorization, and data access
 
 API Server
- - GET /todo: Gets a list of all items
- - ‘POST /todo’: Adds an item
- - ‘PUT /todo’: Updates an item (you’ll use this to mark them as complete)
- - ‘DELETE /todo/:id’ : Deletes an item
+
+- GET /todo: Gets a list of all items
+- ‘POST /todo’: Adds an item
+- ‘PUT /todo’: Updates an item (you’ll use this to mark them as complete)
+- ‘DELETE /todo/:id’ : Deletes an item
 
 Authentication Server
 You will need a deployed Authenticated API Server, which supports:
- - Registration (/signup)
- - Login (/signin)
- - Authorization (via Bearer Token)
- - ACL (using user roles)
- - Make sure you have created the user roles and permissions lists that your front-end is expecting to tap into
- - To Do data model for storing the actual to do items
 
-<!-- - Stretch Goal
-- Use authorization middleware on the server to add another layer of protection, so that only users with the correct permissions can POST/UPDATE/DELETE. -->
-
-<!-- If you choose to do this, you’ll need to send a bearer token with every request…
-
-API Server
-You will need deployed API Server, which implements a todo item data model
-GET /todo: Gets a list of all items
-‘POST /todo’: Adds an item
-‘PUT /todo’: Updates an item (you’ll use this to mark them as complete)
-‘DELETE /todo/:id’ : Deletes an item
-Authentication Server
-You will need a deployed Authenticated API Server, which supports:
-Registration (/signup)
-Login (/signin)
-Authorization (via Bearer Token)
-ACL (using user roles)
-Make sure you have created the user roles and permissions lists that your front-end is expecting to tap into
-To Do data model for storing the actual to do items -->
+- Registration (/signup)
+- Login (/signin)
+- Authorization (via Bearer Token)
+- ACL (using user roles)
+- Make sure you have created the user roles and permissions lists that your front-end is expecting to tap into
+- To Do data model for storing the actual to do items
